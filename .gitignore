@@ -1,0 +1,11 @@
+*.dSYM
+tags
+test_*
+*.o
+*.a
+*.swp
+*.swo
+.ycm_extra_conf.py
+
+echo_server
+redis_server
