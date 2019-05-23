@@ -180,9 +180,11 @@ void octopus_add_listening_socket(
     hint.ai_socktype = SOCK_STREAM;
     hint.ai_family = PF_INET;
     hint.ai_flags = AI_PASSIVE;
+    hint.ai_protocol = IPPROTO_TCP;
 
     if ((errno = getaddrinfo(host, port, &hint, &res0)) != 0) {
-        OCTOPUS_ERROR_LOG("failed to get address information, err: %s", gai_strerror(errno));
+        OCTOPUS_ERROR_LOG("failed to get address information, err: %s, host: %s, port: %s",
+                gai_strerror(errno), host, port);
         return;
     }
 

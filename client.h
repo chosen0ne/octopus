@@ -25,7 +25,7 @@ typedef struct {
     // object holder of processor
     object_t    *processor_obj;
 
-    char        host[16];
+    char        host[OCTOPUS_ADDR_BUF_SIZE];
     uint16_t    port;
 
     buffer_t    *inbuf;

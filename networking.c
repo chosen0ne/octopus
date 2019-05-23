@@ -126,7 +126,7 @@ void client_connected(struct aeEventLoop *event_loop, int fd, void *cli_data, in
     int         cli_fd;
     socklen_t   cli_addrlen, sock_addrlen;
     client_t    *cli;
-    char        sock_host[16];
+    char        sock_host[OCTOPUS_ADDR_BUF_SIZE];
     uint16_t    sock_port;
     protocol_t  *protocol;
     processor_t *processor;
@@ -150,7 +150,7 @@ void client_connected(struct aeEventLoop *event_loop, int fd, void *cli_data, in
         return;
     }
 
-    if (addr_parse(&cli_addr, cli->host, 16, &cli->port) == OCTOPUS_ERR) {
+    if (addr_parse(&cli_addr, cli->host, OCTOPUS_ADDR_BUF_SIZE, &cli->port) == OCTOPUS_ERR) {
         OCTOPUS_ERROR_LOG("failed to parse address for client");
         goto failed;
     }
@@ -161,7 +161,7 @@ void client_connected(struct aeEventLoop *event_loop, int fd, void *cli_data, in
         goto failed;
     }
 
-    if (addr_parse(&sock_addr, sock_host, 16, &sock_port) == OCTOPUS_ERR) {
+    if (addr_parse(&sock_addr, sock_host, OCTOPUS_ADDR_BUF_SIZE, &sock_port) == OCTOPUS_ERR) {
         OCTOPUS_ERROR_LOG("failed to parse address for listen socket");
         goto failed;
     }
@@ -355,7 +355,6 @@ void output_response(struct aeEventLoop *event_loop, int fd, void *cli_data, int
 
     // all output buffer has been send, need remove write event handler
     if (buffer_content_len(cli->outbuf) == 0) {
-        OCTOPUS_TRACE_LOG("rm file event, fd: %d", fd);
         aeDeleteFileEvent(event_loop, fd, AE_WRITABLE);
     }
 

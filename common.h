@@ -10,16 +10,19 @@
 
 #include <stdlib.h>
 
-#define OCTOPUS_OK      0
-#define OCTOPUS_ERR     -1
-#define OCTOPUS_EOF     -2
-#define OCTOPUS_RESET   -3
-#define OCTOPUS_AGAIN   -4
+// retrun value of functions
+#define OCTOPUS_OK          0
+#define OCTOPUS_ERR         -1
+#define OCTOPUS_EOF         -2
+#define OCTOPUS_RESET       -3
+#define OCTOPUS_AGAIN       -4
+#define OCTOPUS_NOT_FOUND   -5
 
+// boolean values
 #define OCTOPUS_TRUE     1
 #define OCTOPUS_FALSE    0
 
-#define OCTOPUS_NOT_FOUND    -2
+#define OCTOPUS_ADDR_BUF_SIZE  100
 
 #define OCTOPUS_NOT_USED(p)  ((void)(p))
 
